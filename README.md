@@ -6,7 +6,8 @@ Deteksi APD 2: <br />
 <br /><br />
 ### Contoh penggunaan APIs
 ```bash
-curl --location 'http://192.168.7.149:8000/detect' \
+
+curl --location 'https://smartdetection.ap.ngrok.io/detect' \
 --header 'accept: application/json' \
 --form 'file=@"/C:/Users/fajar/Downloads/OIP.jpg"'
 ```
@@ -148,6 +149,13 @@ curl --location 'http://192.168.7.149:8000/detect' \
     "image_url": "/static/detected_20241118_153902.jpg"
 }
 ```
+
+### Contoh URL untuk melihat foto setelah proses draw
+```
+https://smartdetection.ap.ngrok.io/static/detected_20241118_162347.jpg
+```
+Ganti dengan field : 
+ "image_url": "/static/detected_20241118_153902.jpg"
 
 ### Hasil pelatihan dari dataset yang tersedia dengan hasil berikut ini
 
