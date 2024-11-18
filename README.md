@@ -1,5 +1,9 @@
 ## Program deteksi perlengkapan APD menggunakan Yolo dan FastAPI
-
+Deteksi APD 1: <br />
+<img src="https://github.com/fajarlabs/safety_detection/blob/master/restapi/static/detected_20241118_153208.jpg" /><br />
+Deteksi APD 2: <br />
+<img src="https://github.com/fajarlabs/safety_detection/blob/master/restapi/static/detected_20241118_153902.jpg" /><br />
+<br /><br />
 ### Hasil pelatihan dari dataset yang tersedia dengan hasil berikut ini
 
 Confusion Matrix : <br />
