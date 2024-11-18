@@ -8,7 +8,16 @@ import io
 import os
 from datetime import datetime
 
-app = FastAPI()
+# Initialize FastAPI with custom metadata
+app = FastAPI(
+    title="Custom Object Detection API",  # Change the title here
+    description="An API for object detection using YOLOv8. Upload an image and detect objects with bounding boxes.",  # Description
+    version="1.0.0",  # API version
+    contact={
+        "name": "Fajar Labs",  # Contact name (optional)
+        "email": "fajarrdp@gmail.com"  # Email (optional)
+    },
+)
 
 # Mount the static directory to serve saved images
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -59,7 +68,7 @@ def save_image(image):
     return filename
 
 # Endpoint for object detection
-@app.post("/detect")
+@app.post("/detect", tags=["Safety Detection"])
 async def detect(file: UploadFile = File(...)):
     try:
         # Read the uploaded image

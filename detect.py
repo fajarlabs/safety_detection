@@ -1,7 +1,9 @@
-'''
+"""
+Developed By Fajarlabs
+
 python detect.py --weights path/to/your/model.pt --source path/to/image_or_video --device cuda
 
-'''
+"""
 from ultralytics import YOLO
 import cv2
 import argparse
