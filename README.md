@@ -6,7 +6,8 @@ Deteksi APD 2: <br />
 <br /><br />
 ### Contoh penggunaan APIs
 ```bash
-curl --location 'http://192.168.7.149:8000/detect' \
+
+curl --location 'https://smartdetection.ap.ngrok.io/detect' \
 --header 'accept: application/json' \
 --form 'file=@"/C:/Users/fajar/Downloads/OIP.jpg"'
 ```
