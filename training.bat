@@ -1,0 +1,1 @@
+yolo task=detect mode=train model=yolov8s.pt data=C:\Research\SafetyDetection\construction-safety-1\data.yaml epochs=100

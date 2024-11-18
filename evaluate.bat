@@ -1,0 +1,1 @@
+yolo task=detect mode=val model=C:\Research\SafetyDetection\construction-safety-1\runs\detect\train\weights\best.pt data=C:\Research\SafetyDetection\construction-safety-1\data.yaml imgsz=640

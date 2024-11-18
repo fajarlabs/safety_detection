@@ -1,0 +1,1 @@
+yolo task=detect mode=predict model=C:\Research\SafetyDetection\construction-safety-1\runs\detect\train\weights\best.pt source=C:\Research\SafetyDetection\foto\dengan_apd.jpg
