@@ -4,6 +4,12 @@ Deteksi APD 1: <br />
 Deteksi APD 2: <br />
 <img src="https://github.com/fajarlabs/safety_detection/blob/master/restapi/static/detected_20241118_153902.jpg" /><br />
 <br /><br />
+### Contoh penggunaan APIs
+```bash
+curl --location 'http://192.168.7.149:8000/detect' \
+--header 'accept: application/json' \
+--form 'file=@"/C:/Users/fajar/Downloads/OIP.jpg"'
+
 ### Hasil pelatihan dari dataset yang tersedia dengan hasil berikut ini
 
 Confusion Matrix : <br />
