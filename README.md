@@ -150,6 +150,13 @@ curl --location 'https://smartdetection.ap.ngrok.io/detect' \
 }
 ```
 
+### Contoh URL untuk melihat foto setelah proses draw
+```
+https://smartdetection.ap.ngrok.io/static/detected_20241118_162347.jpg
+```
+Ganti dengan field : 
+ "image_url": "/static/detected_20241118_153902.jpg"
+
 ### Hasil pelatihan dari dataset yang tersedia dengan hasil berikut ini
 
 Confusion Matrix : <br />
