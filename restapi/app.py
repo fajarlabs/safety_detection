@@ -1,3 +1,8 @@
+"""
+Developed By Fajarlabs
+
+"""
+
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -10,7 +15,7 @@ from datetime import datetime
 
 # Initialize FastAPI with custom metadata
 app = FastAPI(
-    title="Custom Object Detection API",  # Change the title here
+    title="Smart Detection API",  # Change the title here
     description="An API for object detection using YOLOv8. Upload an image and detect objects with bounding boxes.",  # Description
     version="1.0.0",  # API version
     contact={
@@ -108,6 +113,6 @@ async def detect(file: UploadFile = File(...)):
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 # Health check endpoint
-@app.get("/")
+@app.get("/", tags=["Base API"])
 async def root():
     return {"message": "YOLOv8 Object Detection API is running"}
