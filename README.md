@@ -173,6 +173,20 @@ curl -X 'POST' \
   -F 'file=@kecelakaan kerja.jpg;type=image/jpeg'
 ```
 
+## Program deteksi area
+Deteksi Area 1: <br />
+<img src="https://github.com/fajarlabs/safety_detection/blob/master/restapi/static/detected_20241120_000245.jpg" /><br />
+
+### Contoh penggunaan APIs
+```bash
+
+curl -X 'POST' \
+  'https://smartdetection.ap.ngrok.io/detect_zone' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@istock-1068158550-lccqpq.jpeg;type=image/jpeg'
+```
+
 ### Hasil pelatihan dari dataset yang tersedia dengan hasil berikut ini
 
 Confusion Matrix : <br />
