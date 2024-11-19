@@ -27,11 +27,15 @@ app = FastAPI(
 # Mount the static directory to serve saved images
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Load the YOLOv8 model
+# Load the YOLOv8 model Safety
 model = YOLO("C:\\Research\\SafetyDetection\\construction-safety-1\\runs\\detect\\train\\weights\\best.pt")
+# Load the YOLOv8 model Fall
+model2 = YOLO("C:\\Research\\FallDetection\\runs\\detect\\train\\weights\\best.pt")
 
 # Define the class names (update with your model's classes if needed)
 class_names = model.names
+# Define the class names (update with your model's classes if needed)
+class_names2 = model2.names
 
 # Helper function to read image
 def read_image(file: UploadFile):
@@ -61,7 +65,25 @@ def draw_boxes(image, results):
             cv2.putText(image, label, (xyxy[0], xyxy[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
         else :
             cv2.putText(image, label, (xyxy[0], xyxy[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    return image
 
+# Helper function to read image
+def read_image2(file: UploadFile):
+    image_bytes = file.file.read()
+    image = np.frombuffer(image_bytes, np.uint8)
+    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+    return image
+
+# Helper function to draw bounding boxes
+def draw_boxes2(image, results):
+    for box in results[0].boxes:
+        xyxy = box.xyxy[0].cpu().numpy().astype(int)
+        conf = float(box.conf[0])
+        cls = int(box.cls[0])
+        class_name = class_names2[cls]
+        cv2.rectangle(image, (xyxy[0], xyxy[1]), (xyxy[2], xyxy[3]), (0, 255, 0), 2)
+        label = f"{class_name} {conf:.2f}"
+        cv2.putText(image, label, (xyxy[0], xyxy[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
     return image
 
 # Helper function to save the image
@@ -73,8 +95,8 @@ def save_image(image):
     return filename
 
 # Endpoint for object detection
-@app.post("/detect", tags=["Safety Detection"])
-async def detect(file: UploadFile = File(...)):
+@app.post("/detect_ppe", tags=["Safety Detection"])
+async def detect_ppe(file: UploadFile = File(...)):
     try:
         # Read the uploaded image
         image = read_image(file)
@@ -95,6 +117,46 @@ async def detect(file: UploadFile = File(...)):
             conf = float(box.conf[0])
             cls = int(box.cls[0])
             class_name = class_names[cls]
+
+            # Add detection result
+            detections.append({
+                "class": class_name,
+                "confidence": conf,
+                "box": [int(xyxy[0]), int(xyxy[1]), int(xyxy[2]), int(xyxy[3])]
+            })
+
+        # Construct the URL for the saved image
+        image_url = f"/static/{os.path.basename(saved_image_path)}"
+
+        # Return JSON response
+        return JSONResponse(content={"detections": detections, "image_url": image_url})
+
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+
+# Endpoint for object detection
+@app.post("/detect_fall", tags=["Fall Detection"])
+async def detect_fall(file: UploadFile = File(...)):
+    try:
+        # Read the uploaded image
+        image = read_image2(file)
+
+        # Run inference
+        results = model2.predict(image, conf=0.25)
+
+        # Draw bounding boxes on the image
+        image_with_boxes = draw_boxes2(image, results)
+
+        # Save the image with detections
+        saved_image_path = save_image(image_with_boxes)
+
+        # Parse detection results
+        detections = []
+        for box in results[0].boxes:
+            xyxy = box.xyxy[0].cpu().numpy().astype(int)
+            conf = float(box.conf[0])
+            cls = int(box.cls[0])
+            class_name = class_names2[cls]
 
             # Add detection result
             detections.append({
