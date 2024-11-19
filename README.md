@@ -7,9 +7,11 @@ Deteksi APD 2: <br />
 ### Contoh penggunaan APIs
 ```bash
 
-curl --location 'https://smartdetection.ap.ngrok.io/detect' \
---header 'accept: application/json' \
---form 'file=@"/C:/Users/fajar/Downloads/OIP.jpg"'
+curl -X 'POST' \
+  'https://smartdetection.ap.ngrok.io/detect_ppe' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@detected_20241119_133451.jpg;type=image/jpeg'
 ```
 ### Contoh Responsenya
 ```
