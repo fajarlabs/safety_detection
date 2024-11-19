@@ -157,6 +157,20 @@ https://smartdetection.ap.ngrok.io/static/detected_20241118_162347.jpg
 Ganti dengan field : 
  "image_url": "/static/detected_20241118_153902.jpg"
 
+## Program deteksi kecelakaan kerja
+Deteksi Jatuh 1: <br />
+<img src="https://github.com/fajarlabs/safety_detection/blob/master/restapi/static/detected_20241119_133451.jpg" /><br />
+
+### Contoh penggunaan APIs
+```bash
+
+curl -X 'POST' \
+  'https://smartdetection.ap.ngrok.io/detect_fall' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@kecelakaan kerja.jpg;type=image/jpeg'
+```
+
 ### Hasil pelatihan dari dataset yang tersedia dengan hasil berikut ini
 
 Confusion Matrix : <br />
